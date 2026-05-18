@@ -24,7 +24,7 @@ contract CryptoBank {
     
    uint256 public maxBalance;
    address public admin;
-   mapping(address => uint256) public userBalances;
+   mapping(address => uint256) private userBalances;
     //-----------------------constructor-----------------------
 
     constructor( uint256 maxBalance_, address _admin){
@@ -91,7 +91,13 @@ contract CryptoBank {
             maxBalance = newMaxBalance_;
         }
         
+        function getUserBalance(address user_) external view onlyAdmin returns (uint256){
+            return userBalances[user_];
+        }
 
+        function getMyBalance() external view returns (uint256) {
+            return userBalances[msg.sender];
+        }
         //Internal functions
         
     
