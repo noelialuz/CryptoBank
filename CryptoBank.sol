@@ -41,6 +41,7 @@ contract CryptoBank {
 
     event EtherDeposit(address user_ , uint256 etherAmount_ );
     event EtherWithdraw (address user_ , uint256 etherAmount_);
+    event EtherDepositFor(address sender_, address receiver_, uint256 etherAmount_);
     //-----------------------Functions-----------------------
 
     
@@ -66,7 +67,25 @@ contract CryptoBank {
 
             emit EtherWithdraw(msg.sender, amount_);
         }
-        
+        function depositFor(address receiver_, uint256 amount_) external payable{
+            
+            // CEI Pattern: 1. Check(validate balance). 2. Effect(update balance). 3. Interaction(transfer the ether).
+            // Validation
+            require(msg.sender != receiver_, "You cannot deposit for yourself");
+            require(amount_ > 0, "Amount must be greater than 0");
+            require(amount_ <= userBalances[msg.sender], "Not enough ether");
+            require(userBalances[receiver_] + amount_ <= maxBalance, "Max balance reached");
+            
+            
+            // Effect
+            userBalances[msg.sender] -= amount_;
+            userBalances[receiver_] += amount_;
+
+            // Interaction
+            (bool success_, ) = msg.sender.call{value: amount_}("");
+            require(success_, "Transfer failed");
+            emit EtherDepositFor(msg.sender, receiver_, amount_);
+        }
         // modify MaxBalance
         function modifyMaxBalance(uint256 newMaxBalance_) external onlyAdmin{
             maxBalance = newMaxBalance_;
