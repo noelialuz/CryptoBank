@@ -1,7 +1,7 @@
 # 🏦 CryptoBank
 
 [![GitHub Repository](https://img.shields.io/badge/github-noelialuz%2FCryptoBank-blue?logo=github)](https://github.com/noelialuz/CryptoBank)
-[![Solidity](https://img.shields.io/badge/solidity-^0.8.24-363636?logo=solidity&logoColor=white)](https://soliditylang.org/)
+[![Solidity](https://img.shields.io/badge/solidity-^0.8.35-363636?logo=solidity&logoColor=white)](https://soliditylang.org/)
 [![License: LGPL-3.0-only](https://img.shields.io/badge/license-LGPL--3.0--only-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0.html)
 [![EVM](https://img.shields.io/badge/EVM-compatible-3C3C3D?logo=ethereum&logoColor=white)](https://ethereum.org/)
 
